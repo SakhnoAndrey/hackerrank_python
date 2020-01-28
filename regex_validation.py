@@ -29,5 +29,24 @@ def floating_point_number():
         print(str(bool(result)))
 
 
+def re_split():
+    # Input
+    number = input()
+
+    # Function
+    regex_pattern = r"[\.,]"
+    print("\n".join(re.split(regex_pattern, number)))
+
+
+def group_groups_groupdict():
+    # Input
+    s = input()
+
+    # Function
+    regex_pattern = r"([a-zA-Z0-9])\1+"
+    m = re.search(regex_pattern, s)
+    print(m.group(0)[0] if m else -1)
+
+
 if __name__ == '__main__':
-    floating_point_number()
+    group_groups_groupdict()
