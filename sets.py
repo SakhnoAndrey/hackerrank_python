@@ -100,11 +100,13 @@ def set_mutations():
         eval("a." + command)
     print(sum(a))
 
+
 def captain_room():
     # Input
     k, arr = int(input()), list(map(int, input().split()))
     myset = set(arr)
     print(((sum(myset) * k) - (sum(arr))) // (k - 1))
+
 
 def check_subset():
     # Input
@@ -117,6 +119,7 @@ def check_subset():
         # Function
         print(a <= b)
 
+
 def check_strict_superset():
     # Input
     a = set(map(int, input().strip().split()))
@@ -126,6 +129,7 @@ def check_strict_superset():
         b = set(map(int, input().strip().split()))
         superset &= a > b
     print(superset)
+
 
 def no_idea():
     # Input
