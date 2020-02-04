@@ -1,4 +1,10 @@
-from itertools import product, permutations, combinations, combinations_with_replacement, groupby
+from itertools import (
+    product,
+    permutations,
+    combinations,
+    combinations_with_replacement,
+    groupby,
+)
 
 
 def itertools_product():
@@ -52,7 +58,7 @@ def iterables_and_iterators():
     k = int(input())
     # Function
     arr = list(combinations(arr, k))
-    count = len([elem for elem in arr if 'a' in elem])
+    count = len([elem for elem in arr if "a" in elem])
     probability = count / len(arr)
     print("{:.4f}".format(probability))
 

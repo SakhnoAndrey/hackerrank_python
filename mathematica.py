@@ -24,10 +24,19 @@ def find_angle_MBC():
 def triangle_quest_2():
     # Input
     # Function var 1
-    for i in range(1, int(input()) + 1):  # More than 2 lines will result in 0 score. Do not leave a blank line also
-        print(sum(((j + 1) * (10 ** j) + (j + 1) * (10 ** (2 * i - j - 2)) * (j + 1 != i)) for j in range(i)))
+    for i in range(
+        1, int(input()) + 1
+    ):  # More than 2 lines will result in 0 score. Do not leave a blank line also
+        print(
+            sum(
+                ((j + 1) * (10 ** j) + (j + 1) * (10 ** (2 * i - j - 2)) * (j + 1 != i))
+                for j in range(i)
+            )
+        )
     # Function var 2
-    for i in range(1, int(input()) + 1):  # More than 2 lines will result in 0 score. Do not leave a blank line also
+    for i in range(
+        1, int(input()) + 1
+    ):  # More than 2 lines will result in 0 score. Do not leave a blank line also
         print((10 ** i // 9) ** 2)
 
 
@@ -61,7 +70,9 @@ def integer_come_in_all_size():
 def triangle_quest():
     # Input
     # Function
-    for i in range(1, int(input())):  # More than 2 lines will result in 0 score. Do not leave a blank line also
+    for i in range(
+        1, int(input())
+    ):  # More than 2 lines will result in 0 score. Do not leave a blank line also
         print(i * 10 ** i // 9)
 
 

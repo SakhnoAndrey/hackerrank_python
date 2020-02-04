@@ -58,8 +58,8 @@ def is_leap():
 def print_function():
     n = int(input())
     for i in range(1, n + 1):
-        print(i, sep='', end='')
+        print(i, sep="", end="")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print_function()

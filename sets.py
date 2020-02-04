@@ -43,7 +43,7 @@ def discard_remove_pop():
     # Function
     for _ in range(c):
         command, *args = input().rstrip().split()
-        command += "({0})".format(','.join(args))
+        command += "({0})".format(",".join(args))
         eval("s." + command)
     print(sum(s))
 

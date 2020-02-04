@@ -35,7 +35,7 @@ def mutations():
     position = int(line[0])
     character = line[1]
     # Function
-    string = string[:position] + character + string[position + 1:]
+    string = string[:position] + character + string[position + 1 :]
     return string
 
 
@@ -46,7 +46,7 @@ def find_string():
     # Function
     count = 0
     for i in range(len(string) - len(sub_string) + 1):
-        if string[i:i + len(sub_string)] == sub_string:
+        if string[i : i + len(sub_string)] == sub_string:
             count += 1
     return count
 
@@ -57,7 +57,9 @@ def string_validators():
     # Function
     # uses all 5 methods on each character and creates a list for each,
     # containing the results of each method used on the character.
-    new_list = [[c.isalnum(), c.isalpha(), c.isdigit(), c.islower(), c.isupper()] for c in s]
+    new_list = [
+        [c.isalnum(), c.isalpha(), c.isdigit(), c.islower(), c.isupper()] for c in s
+    ]
 
     # rotates lists clockwise to get lists of each method instead
     rotated = list(zip(*new_list))
@@ -70,7 +72,7 @@ def text_alignments():
     # Replace all ______ with rjust, ljust or center.
 
     thickness = int(input())  # This must be an odd number
-    c = 'H'
+    c = "H"
 
     # Top Cone
     for i in range(thickness):
@@ -78,7 +80,10 @@ def text_alignments():
 
     # Top Pillars
     for i in range(thickness + 1):
-        print((c * thickness).center(thickness * 2) + (c * thickness).center(thickness * 6))
+        print(
+            (c * thickness).center(thickness * 2)
+            + (c * thickness).center(thickness * 6)
+        )
 
     # Middle Belt
     for i in range((thickness + 1) // 2):
@@ -86,12 +91,20 @@ def text_alignments():
 
         # Bottom Pillars
     for i in range(thickness + 1):
-        print((c * thickness).center(thickness * 2) + (c * thickness).center(thickness * 6))
+        print(
+            (c * thickness).center(thickness * 2)
+            + (c * thickness).center(thickness * 6)
+        )
 
         # Bottom Cone
     for i in range(thickness):
-        print(((c * (thickness - i - 1)).rjust(thickness) + c + (c * (thickness - i - 1)).ljust(thickness)).rjust(
-            thickness * 6))
+        print(
+            (
+                (c * (thickness - i - 1)).rjust(thickness)
+                + c
+                + (c * (thickness - i - 1)).ljust(thickness)
+            ).rjust(thickness * 6)
+        )
 
 
 def text_wrap():
@@ -116,7 +129,9 @@ def string_formatting():
     # Function
     width = len("{0:b}".format(n))
     for i in range(1, n + 1):
-        print("{0:{width}d} {0:{width}o} {0:{width}X} {0:{width}b}".format(i, width=width))
+        print(
+            "{0:{width}d} {0:{width}o} {0:{width}X} {0:{width}b}".format(i, width=width)
+        )
 
 
 def alphabet_rangoli():
@@ -173,7 +188,7 @@ def merge_tools():
     n = len(s)
     arr = []
     for i in range(0, n, k):
-        substring = s[i:i + k]
+        substring = s[i : i + k]
         word = ""
         for char in substring:
             if char not in word:
@@ -183,5 +198,5 @@ def merge_tools():
     print(s)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     merge_tools()

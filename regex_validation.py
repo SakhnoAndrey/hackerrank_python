@@ -6,10 +6,10 @@ def romanian_numerals():
     numerals = input()
 
     # Function
-    thousand = '(M{0,3})'
-    hundred = '(CM|CD|D?C{0,3})'
-    ten = '(XC|XL|L?X{0,3})'
-    digit = '(IX|IV|V?I{0,3})'
+    thousand = "(M{0,3})"
+    hundred = "(CM|CD|D?C{0,3})"
+    ten = "(XC|XL|L?X{0,3})"
+    digit = "(IX|IV|V?I{0,3})"
     regex_pattern = r"^{0}{1}{2}{3}$".format(thousand, hundred, ten, digit)
     result = re.match(regex_pattern, numerals)
     print(str(bool(result)))
@@ -48,5 +48,5 @@ def group_groups_groupdict():
     print(m.group(0)[0] if m else -1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     group_groups_groupdict()

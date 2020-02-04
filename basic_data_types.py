@@ -3,7 +3,15 @@ def list_comprehensions():
     y = int(input())
     z = int(input())
     n = int(input())
-    print([[i, j, k] for i in range(x + 1) for j in range(y + 1) for k in range(z + 1) if i + j + k != n])
+    print(
+        [
+            [i, j, k]
+            for i in range(x + 1)
+            for j in range(y + 1)
+            for k in range(z + 1)
+            if i + j + k != n
+        ]
+    )
 
 
 def runner_up():
@@ -25,11 +33,17 @@ def runner_up():
 def nested_lists():
     # Input
     students_list = []
-    '''for _ in range(int(input())):
+    """for _ in range(int(input())):
         name = input()
         score = float(input())
-        students_list.append([name, score])'''
-    students_list = [["Harry", 37.21], ["Berry", 37.21], ["Tina", 37.2], ["Akriti", 41], ["Harsh", 39]]
+        students_list.append([name, score])"""
+    students_list = [
+        ["Harry", 37.21],
+        ["Berry", 37.21],
+        ["Tina", 37.2],
+        ["Akriti", 41],
+        ["Harsh", 39],
+    ]
     print(students_list)
 
     # Function
@@ -53,7 +67,7 @@ def nested_lists():
         print(item)
 
 
-def finding_percentege():
+def finding_percentage():
     # Input
     n = int(input())
     student_marks = {}
@@ -65,7 +79,7 @@ def finding_percentege():
 
     # Function
     marks = student_marks[query_name]
-    print('{0:.2f}'.format(sum(marks) / len(marks)))
+    print("{0:.2f}".format(sum(marks) / len(marks)))
 
 
 def list_commands():
@@ -78,7 +92,7 @@ def list_commands():
         s = input()
         command, *args = s.rstrip().split()
         if command != "print":
-            command += '(' + ','.join(args) + ')'
+            command += "(" + ",".join(args) + ")"
             eval("data." + command)
         else:
             print(data)
@@ -94,5 +108,5 @@ def func_tuple():
     print(hash(t))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     func_tuple()
