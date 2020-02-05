@@ -78,7 +78,23 @@ def company_logo():
 
 def piling_up():
     # Input
-    t = int(input().strip().split())
+    t = int(input().strip())
+    for _ in range(t):
+        n = int(input().strip())
+        cubes = deque(list(map(int, input().strip().split())))
+        pile = "Yes"
+        for cube in reversed(sorted(cubes)):
+            if cubes[0] == cube:
+                cubes.popleft()
+            elif cubes[-1] == cube:
+                cubes.pop()
+            else:
+                pile = "No"
+                break
+        print(pile)
+
+
+
 
 
 piling_up()
