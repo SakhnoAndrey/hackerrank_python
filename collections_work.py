@@ -94,7 +94,4 @@ def piling_up():
         print(pile)
 
 
-
-
-
 piling_up()
