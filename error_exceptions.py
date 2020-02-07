@@ -1,5 +1,6 @@
 import re
 
+
 def exceptions_func():
     for _ in range(int(input().strip())):
         try:
@@ -18,7 +19,6 @@ def incorrect_regex():
         except re.error:
             ans = False
         print(ans)
-
 
 
 incorrect_regex()

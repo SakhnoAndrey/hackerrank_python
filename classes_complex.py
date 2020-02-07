@@ -13,13 +13,16 @@ class Complex(object):
         return Complex(self.real - other.real, self.imaginary - other.imaginary)
 
     def __mul__(self, other):
-        return Complex(self.real * other.real - self.imaginary * other.imaginary,
-                       self.real * other.imaginary + self.imaginary * other.real)
+        return Complex(
+            self.real * other.real - self.imaginary * other.imaginary,
+            self.real * other.imaginary + self.imaginary * other.real,
+        )
 
     def __truediv__(self, other):
         try:
             return self.__mul__(Complex(other.real, -1 * other.imaginary)).__mul__(
-                Complex(1.0 / (other.mod().real) ** 2, 0))
+                Complex(1.0 / (other.mod().real) ** 2, 0)
+            )
         except ZeroDivisionError as e:
             print(e)
             return None
@@ -42,9 +45,9 @@ class Complex(object):
         return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     c = map(float, input().split())
     d = map(float, input().split())
     x = Complex(*c)
     y = Complex(*d)
-    print(*map(str, [x + y, x - y, x * y, x / y, x.mod(), y.mod()]), sep='\n')
+    print(*map(str, [x + y, x - y, x * y, x / y, x.mod(), y.mod()]), sep="\n")
