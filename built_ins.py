@@ -25,12 +25,29 @@ def athlete_sort():
 
 def any_or_all():
     n, arr = int(input().strip()), list(map(int, input().strip().split()))
-    print(any([str(el) == str(el)[::-1] for el in arr]) if all([el >= 0 for el in arr]) else False)
+    print(
+        any([str(el) == str(el)[::-1] for el in arr])
+        if all([el >= 0 for el in arr])
+        else False
+    )
 
 
 def ginortS():
-    print(*(sorted(input(), key=lambda x: (x.isdigit(), x.isdigit() and int(x) % 2 == 0, x.isupper(), x.islower(), x))),
-          sep='')
+    print(
+        *(
+            sorted(
+                input(),
+                key=lambda x: (
+                    x.isdigit(),
+                    x.isdigit() and int(x) % 2 == 0,
+                    x.isupper(),
+                    x.islower(),
+                    x,
+                ),
+            )
+        ),
+        sep=""
+    )
 
 
 ginortS()
