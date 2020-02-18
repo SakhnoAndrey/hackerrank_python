@@ -111,7 +111,7 @@ def hex_color_code():
     print("\n".join(arr))
 
 
-class MyHTMLParser(HTMLParser):
+class MyHTMLParser1(HTMLParser):
     def handle_starttag(self, tag, attrs):
         self.handler("Start", tag, attrs)
 
@@ -128,13 +128,96 @@ class MyHTMLParser(HTMLParser):
                 print("-> {0} > {1}".format(a[0], a[1]))
 
 
+class MyHTMLParser2(HTMLParser):
+    def handle_comment(self, data):
+        type_comment = (
+            "Single-line" if len(data.split("\n")) == 1 else "Multi-line"
+        ) + " Comment"
+        self.handler(type_comment, data)
+
+    def handle_data(self, data):
+        self.handler("Data", data)
+
+    def handler(self, type_tag, data):
+        if data.strip():
+            print(">>> {0}".format(type_tag))
+            print(data)
+
+
+class MyDetectHTMLTagAttr(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        self.handler(tag, attrs)
+
+    def handler(self, tag, attrs=[]):
+        print(tag)
+        if attrs:
+            for attr in attrs:
+                print("-> {0} > {1}".format(attr[0], attr[1]))
+
+
 def html_parser_1():
     arr = []
     for _ in range(int(input())):
         arr.append(input())
-    parser = MyHTMLParser()
+    parser = MyHTMLParser1()
     parser.feed("\n".join(arr))
+    parser.close()
+
+
+def html_parser_2():
+    html = ""
+    for _ in range(int(input())):
+        html += input().rstrip() + "\n"
+    parser = MyHTMLParser2()
+    parser.feed(html)
+    parser.close()
+
+
+def detect_html_tag():
+    html = ""
+    for _ in range(int(input())):
+        html += input().rstrip() + "\n"
+    parser = MyDetectHTMLTagAttr()
+    parser.feed(html)
+    parser.close()
+
+
+def validating_uid():
+    for _ in range(int(input())):
+        s = input()
+        print(
+            "Valid"
+            if all(
+                [
+                    re.search(r, s)
+                    for r in [r"[A-Za-z0-9]{10}", r"([A-Z].*){2}", r"([0-9].*){3}"]
+                ]
+            )
+            and not re.search(r".*(.).*\1", s)
+            else "Invalid"
+        )
+
+
+def validating_credit_card():
+    for _ in range(int(input())):
+        s = input()
+        if re.match(r"^[456]([\d]{15}|[\d]{3}(-[\d]{4}){3})$", s) and not re.search(
+            r"([\d])\1\1\1", s.replace("-", "")
+        ):
+            print("Valid")
+        else:
+            print("Invalid")
+
+
+def validating_postal_codes():
+    p = input()
+    regex_integer_in_range = r"_________"  # Do not delete 'r'.
+    regex_alternating_repetitive_digit_pair = r"_________"  # Do not delete 'r'.
+    print(
+        bool(re.match(regex_integer_in_range, p))
+        and len(re.findall(regex_alternating_repetitive_digit_pair, p)) < 2
+    )
 
 
 if __name__ == "__main__":
-    html_parser_1()
+    validating_credit_card()
