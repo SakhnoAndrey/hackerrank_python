@@ -131,8 +131,8 @@ class MyHTMLParser1(HTMLParser):
 class MyHTMLParser2(HTMLParser):
     def handle_comment(self, data):
         type_comment = (
-                           "Single-line" if len(data.split("\n")) == 1 else "Multi-line"
-                       ) + " Comment"
+            "Single-line" if len(data.split("\n")) == 1 else "Multi-line"
+        ) + " Comment"
         self.handler(type_comment, data)
 
     def handle_data(self, data):
@@ -193,7 +193,7 @@ def validating_uid():
                     for r in [r"[A-Za-z0-9]{10}", r"([A-Z].*){2}", r"([0-9].*){3}"]
                 ]
             )
-               and not re.search(r".*(.).*\1", s)
+            and not re.search(r".*(.).*\1", s)
             else "Invalid"
         )
 
@@ -202,7 +202,7 @@ def validating_credit_card():
     for _ in range(int(input())):
         s = input()
         if re.match(r"^[456]([\d]{15}|[\d]{3}(-[\d]{4}){3})$", s) and not re.search(
-                r"([\d])\1\1\1", s.replace("-", "")
+            r"([\d])\1\1\1", s.replace("-", "")
         ):
             print("Valid")
         else:
@@ -228,7 +228,7 @@ def matrix_script():
         matrix_item = input()
         matrix.append(matrix_item)
     matrix = "".join(["".join(s) for s in zip(*matrix)])
-    print(re.sub(r'\b[^A-Za-z0-9]+\b', ' ', matrix))
+    print(re.sub(r"\b[^A-Za-z0-9]+\b", " ", matrix))
 
 
 if __name__ == "__main__":
