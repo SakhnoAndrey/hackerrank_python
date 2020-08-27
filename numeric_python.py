@@ -34,4 +34,21 @@ def transpose_flatten():
     print(np_arr.flatten())
 
 
-transpose_flatten()
+# Concatenate
+def concatenate_arrays():
+    # Input
+    n, m, p = map(int, input().rstrip().split())
+    array_1 = []
+    array_2 = []
+    for i in range(n):
+        array_1.append(list(map(int, input().rstrip().split())))
+    for i in range(m):
+        array_2.append(list(map(int, input().rstrip().split())))
+
+    # Function
+    np_arr_1 = numpy.array(array_1)
+    np_arr_2 = numpy.array(array_2)
+    print(numpy.concatenate((array_1, array_2), axis=0))
+
+
+concatenate_arrays()
