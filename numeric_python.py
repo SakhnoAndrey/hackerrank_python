@@ -61,4 +61,14 @@ def zeros_and_ones():
     print(numpy.ones(t, dtype=numpy.int))
 
 
-zeros_and_ones()
+# Eye and Identity
+def eye_and_identity():
+    # Input
+    n, m = map(int, input().strip().split())
+
+    # Function
+    numpy.set_printoptions(sign=" ")
+    print(numpy.eye(n, m, k=0))
+
+
+eye_and_identity()
