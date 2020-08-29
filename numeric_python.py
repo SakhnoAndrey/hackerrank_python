@@ -51,4 +51,14 @@ def concatenate_arrays():
     print(numpy.concatenate((array_1, array_2), axis=0))
 
 
-concatenate_arrays()
+# Zeros and ones
+def zeros_and_ones():
+    # Input
+    t = tuple(map(int, input().rstrip().split()))
+
+    # Function
+    print(numpy.zeros(t, dtype=numpy.int))
+    print(numpy.ones(t, dtype=numpy.int))
+
+
+zeros_and_ones()
