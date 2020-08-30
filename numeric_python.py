@@ -1,6 +1,13 @@
 import numpy
 
 
+def enter_array(n):
+    arr = []
+    for i in range(n):
+        arr.append(list(map(int, input().rstrip().split())))
+    return numpy.array(arr)
+
+
 # Arrays
 def arrays():
     # Input
@@ -24,12 +31,9 @@ def shape_reshape():
 def transpose_flatten():
     # Input
     n, m = map(int, input().rstrip().split())
-    arr = []
-    for i in range(n):
-        arr.append(list(map(int, input().rstrip().split())))
 
     # Function
-    np_arr = numpy.array(arr)
+    np_arr = enter_array(n)
     print(np_arr.transpose())
     print(np_arr.flatten())
 
@@ -46,8 +50,8 @@ def concatenate_arrays():
         array_2.append(list(map(int, input().rstrip().split())))
 
     # Function
-    np_arr_1 = numpy.array(array_1)
-    np_arr_2 = numpy.array(array_2)
+    np_arr_1 = enter_array(n)
+    np_arr_2 = enter_array(m)
     print(numpy.concatenate((array_1, array_2), axis=0))
 
 
@@ -71,4 +75,20 @@ def eye_and_identity():
     print(numpy.eye(n, m, k=0))
 
 
-eye_and_identity()
+# Arrays mathematics
+def arrays_mathematics():
+    # Input
+    n, m = map(int, input().strip().split())
+
+    # Function
+    np_array_1 = enter_array(n)
+    np_array_2 = enter_array(n)
+    print(np_array_1 + np_array_2)
+    print(np_array_1 - np_array_2)
+    print(np_array_1 * np_array_2)
+    print(np_array_1 // np_array_2)
+    print(np_array_1 % np_array_2)
+    print(np_array_1 ** np_array_2)
+
+
+arrays_mathematics()
