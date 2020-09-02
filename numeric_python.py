@@ -103,4 +103,14 @@ def floor_ceil_rint():
     print(numpy.rint(arr))
 
 
-floor_ceil_rint()
+# Sum and Prod
+def sum_prod():
+    # Input
+    n, m = map(int, input().strip().split())
+    arr = enter_array(n)
+
+    # Function
+    print(numpy.product(numpy.sum(arr, axis=0)))
+
+
+sum_prod()
