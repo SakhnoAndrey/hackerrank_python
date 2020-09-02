@@ -91,4 +91,16 @@ def arrays_mathematics():
     print(np_array_1 ** np_array_2)
 
 
-arrays_mathematics()
+# Floor, Ceil and Rint
+def floor_ceil_rint():
+    # Input
+    arr = numpy.array(list(map(float, input().strip().split())))
+
+    # Function
+    numpy.set_printoptions(sign=" ")
+    print(numpy.floor(arr))
+    print(numpy.ceil(arr))
+    print(numpy.rint(arr))
+
+
+floor_ceil_rint()
