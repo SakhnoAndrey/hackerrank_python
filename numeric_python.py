@@ -113,4 +113,14 @@ def sum_prod():
     print(numpy.product(numpy.sum(arr, axis=0)))
 
 
-sum_prod()
+# Min and max
+def min_max():
+    # Input
+    n, m = map(int, input().strip().split())
+    arr = enter_array(n)
+
+    # Function
+    print(numpy.max(numpy.min(arr, axis=1)))
+
+
+min_max()
