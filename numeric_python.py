@@ -123,4 +123,17 @@ def min_max():
     print(numpy.max(numpy.min(arr, axis=1)))
 
 
-min_max()
+# Mean, Var and Std
+def mean_var_std():
+    # Input
+    n, m = map(int, input().strip().split())
+    arr = enter_array(n)
+
+    # Function
+    numpy.set_printoptions(legacy="1.13")
+    print(numpy.mean(arr, axis=1))
+    print(numpy.var(arr, axis=0))
+    print(numpy.std(arr))
+
+
+mean_var_std()
