@@ -136,4 +136,15 @@ def mean_var_std():
     print(numpy.std(arr))
 
 
-mean_var_std()
+# Dot and cross
+def dot_cross():
+    # Input
+    n = int(input())
+    arr_a = enter_array(n)
+    arr_b = enter_array(n)
+
+    # Function
+    print(numpy.dot(arr_a, arr_b))
+
+
+dot_cross()
