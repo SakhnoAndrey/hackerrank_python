@@ -147,4 +147,15 @@ def dot_cross():
     print(numpy.dot(arr_a, arr_b))
 
 
-dot_cross()
+# Inner and outer
+def inner_outer():
+    # Input
+    arr_a = numpy.array(list(map(int, input().strip().split())))
+    arr_b = numpy.array(list(map(int, input().strip().split())))
+
+    # Function
+    print(numpy.inner(arr_a, arr_b))
+    print(numpy.outer(arr_a, arr_b))
+
+
+inner_outer()
