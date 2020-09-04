@@ -158,4 +158,14 @@ def inner_outer():
     print(numpy.outer(arr_a, arr_b))
 
 
-inner_outer()
+# Polynomials
+def polynomials():
+    # Input
+    p = numpy.array(list(map(float, input().strip().split())))
+    x = int(input())
+
+    # Function
+    print(numpy.polyval(p, x))
+
+
+polynomials()
