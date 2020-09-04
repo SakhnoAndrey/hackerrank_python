@@ -168,4 +168,17 @@ def polynomials():
     print(numpy.polyval(p, x))
 
 
-polynomials()
+# Linear Algebra
+def linear_algebra():
+    # Input
+    n = int(input())
+    arr = []
+    for i in range(n):
+        arr.append(list(map(float, input().rstrip().split())))
+    arr = numpy.array(arr)
+
+    # Function
+    print(round(numpy.linalg.det(arr), 2))
+
+
+linear_algebra()
