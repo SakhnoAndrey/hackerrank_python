@@ -1,3 +1,7 @@
+import math
+from itertools import combinations
+
+
 def twoPluses():
     # Write your code here
     # https://www.hackerrank.com/challenges/two-pluses
@@ -45,6 +49,21 @@ def twoPluses():
 
     return max_area_product
 
+def alternate():
+    # Write your code here
+    # https://www.hackerrank.com/challenges/two-characters/
+
+    s = 'beabeefeab'
+
+    symbols = set(s)
+    temp = [symbols - set(item) for item in combinations(symbols, 2)]
+    two_symbol_str = [s.translate({ord(c): None for c in item}) for item in temp]
+    result = 0
+    for item in two_symbol_str:
+        if item[0] != item[1] and (item[:2] * math.ceil(len(item)/2))[:len(item)] == item and result < len(item):
+            result = len(item)
+    return result
+
 
 if __name__ == '__main__':
-    twoPluses()
+    alternate()
