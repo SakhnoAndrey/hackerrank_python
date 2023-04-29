@@ -65,5 +65,13 @@ def alternate():
     return result
 
 
+def bigSorting():
+    # Write your code here
+    unsorted = ['1', '200', '150', '3']
+
+    result = sorted(unsorted, key=lambda x: (len(x), x), reverse=False)
+    return result
+
+
 if __name__ == '__main__':
-    alternate()
+    bigSorting()
