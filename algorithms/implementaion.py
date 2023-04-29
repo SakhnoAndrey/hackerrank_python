@@ -64,5 +64,29 @@ OO.....
     return None
 
 
+#
+# Complete the 'larrysArray' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts INTEGER_ARRAY A as parameter.
+#
+
+def larrysArray():
+    # Write your code here
+    a = [1, 6, 5, 2, 4, 3]
+
+    invertions = 0
+    for i in range(len(a)):
+        for j in range(i + 1, len(a)):
+            if a[i] > a[j]:
+                invertions += 1
+
+    # If the number of inversions is odd, the array cannot be sorted
+    # If the number of inversions is even, the array can be sorted
+
+    return 'NO' if invertions % 2 == 1 else 'YES'
+
+
+
 if __name__ == "__main__":
     print(bomber_man())
