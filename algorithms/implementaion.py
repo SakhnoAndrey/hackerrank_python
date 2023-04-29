@@ -87,6 +87,35 @@ def larrysArray():
     return 'NO' if invertions % 2 == 1 else 'YES'
 
 
+#
+# Complete the 'almostSorted' function below.
+#
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+def almostSorted():
+    # Write your code here
+    arr = "1 5 4 3 2 6"
+    arr = "3 1 2"
+    arr = list(map(int, arr.split(' ')))
+
+    sorted_arr = sorted(arr)
+    sort_type = None
+
+    unsorted_id = [i for i, (x, y) in enumerate(zip(arr, sorted_arr)) if x != y]
+
+    # Check swap two elements
+    if len(unsorted_id) == 2:
+        sort_type = 'swap'
+
+    # Check reverse one sub-segment
+    if sort_type is None and all([arr[i] > arr[i + 1] for i in unsorted_id[:-1]]):
+        sort_type = 'reverse'
+
+    result = f"yes\n{sort_type} {unsorted_id[0] + 1} {unsorted_id[-1] + 1}" if sort_type else 'no'
+    print(result)
+    return
+
 
 if __name__ == "__main__":
-    print(bomber_man())
+    print(almostSorted())
