@@ -96,3 +96,4 @@ flask_profiler.sql
 /data/import/recording_file.csv
 
 *.log
+/test.txt
