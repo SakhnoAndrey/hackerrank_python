@@ -1,4 +1,6 @@
 # Task 1
+import os
+
 
 def task1():
     dict_old = {1: "value1", 2: "value2"}
@@ -50,5 +52,63 @@ def task8():
     print(dict(value_sort_max))
 
 
+def activityNotifications_input():
+    def activityNotifications(expenditure: list, d: int):
+
+        def get_median_value(count_array, d):
+            counter = 0
+            median_expenditure = []
+            for j, _ in enumerate(count_array):
+                if count_array[j] == 0:
+                    continue
+
+                counter += count_array[j]
+
+                if counter >= d // 2 + d % 2 and not median_expenditure:
+                    median_expenditure.append(j)
+
+                    if counter >= d // 2 + d % 2 + 1 and quantity_expenditure == 2:
+                        median_expenditure.append(j)
+                        break
+                    continue
+
+                if median_expenditure and quantity_expenditure == 2:
+                    median_expenditure.append(j)
+
+            return sum(median_expenditure)/quantity_expenditure
+
+        # Write your code here
+        count = 0
+        count_array = [0] * 201
+        quantity_expenditure = 2 if d % 2 == 0 else 1
+
+        for i in range(d):
+            count_array[expenditure[i]] += 1
+
+        for i in range(d, len(expenditure)):
+            if expenditure[i] >= get_median_value(count_array, d) * 2:
+                count += 1
+
+            count_array[expenditure[i - d]] -= 1
+            count_array[expenditure[i]] += 1
+        return count
+
+    # Write your code here
+    # first_multiple_input = input().rstrip().split()
+
+    # n = int(first_multiple_input[0])
+    n = 9
+
+    # d = int(first_multiple_input[1])
+    d = 5
+
+    # expenditure = list(map(int, input().rstrip().split()))
+    expenditure = [2, 3, 4, 2, 3, 6, 8, 4, 5]
+
+    result = activityNotifications(expenditure, d)
+
+    print(result)
+
+
 if __name__ == "__main__":
-    task8()
+    activityNotifications_input()
