@@ -58,24 +58,29 @@ def activityNotifications_input():
         def get_median_value(count_array, d):
             counter = 0
             median_expenditure = []
-            for j, _ in enumerate(count_array):
-                if count_array[j] == 0:
-                    continue
 
-                counter += count_array[j]
+            if d % 2 != 0:
+                for j in range(len(count_array)):
+                    counter += count_array[j]
 
-                if counter >= d // 2 + d % 2 and not median_expenditure:
-                    median_expenditure.append(j)
-
-                    if counter >= d // 2 + d % 2 + 1 and quantity_expenditure == 2:
+                    if counter > d // 2:
                         median_expenditure.append(j)
                         break
-                    continue
 
-                if median_expenditure and quantity_expenditure == 2:
-                    median_expenditure.append(j)
+            else:
+                for j, _ in enumerate(count_array):
+                    counter += count_array[j]
 
-            return sum(median_expenditure)/quantity_expenditure
+                    if not median_expenditure and counter >= d // 2:
+                        median_expenditure.append(j)
+
+                    if len(median_expenditure) == 1 and counter >= d // 2 + 1:
+                        median_expenditure.append(j)
+                        break
+
+            median = sum(median_expenditure)/quantity_expenditure
+
+            return median
 
         # Write your code here
         count = 0
