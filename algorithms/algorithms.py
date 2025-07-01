@@ -71,7 +71,24 @@ def bigSorting():
 
     result = sorted(unsorted, key=lambda x: (len(x), x), reverse=False)
     return result
-
+def superReducedString(s):
+    result = ''
+    while True:
+        skip_idx = -1
+        for i, char in enumerate(s):
+            if skip_idx == i:
+                skip_idx = -1
+                continue
+            if (i + 2 <= len(s)) and char == s[i+1]:
+                skip_idx = i + 1
+                continue
+            result += char
+        if result == s:
+            break
+        s, result = result, ''
+    if result == '':
+        result = 'Empty String'
+    return result
 
 if __name__ == '__main__':
-    bigSorting()
+    print(superReducedString('aaabccddd'))
