@@ -1,7 +1,7 @@
 from helpers import str_to_list_of_int
 
 
-def insertionSort1(n, arr):
+def insertionSort1v1(n, arr):
     start_idx = 0
     finish_idx = len(arr) - 2
     found_idx = -1
@@ -26,7 +26,25 @@ def insertionSort1(n, arr):
         else:
             return sorted_arr[:mid_idx] + [last_item] + sorted_arr[mid_idx:]
 
+def insertionSort1v2(n, arr):
+    last_item_idx = len(arr) - 1
+    while True:
+        if arr[last_item_idx] < arr[last_item_idx - 1]:
+            arr[last_item_idx], arr[last_item_idx - 1] = arr[last_item_idx - 1], arr[last_item_idx]
+            last_item_idx -= 1
+            print(' '.join(map(str, arr)))
+            continue
+        return
+
+def insertionSort2(n, arr):
+    i = 0
+    for i in range(1, n):
+        for j, item in enumerate(arr[:i]):
+            if item  > arr[i]:
+                arr[i], arr[j] = arr[j], arr[i]
+        print(' '.join(map(str, arr)))
+
+
 
 if __name__ == '__main__':
-    res = insertionSort1(5, str_to_list_of_int('2 4 6 8 3'))
-    print(res)
+    insertionSort2(5, str_to_list_of_int('2 4 6 8 3'))
