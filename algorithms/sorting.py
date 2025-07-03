@@ -1,6 +1,13 @@
 from helpers import str_to_list_of_int
 
 
+def introTutorial(V, arr):
+    # Write your code here
+    results = [i for i, item in enumerate(arr) if item == V]
+    if results:
+        return results[0]
+
+
 def insertionSort1v1(n, arr):
     start_idx = 0
     finish_idx = len(arr) - 2
