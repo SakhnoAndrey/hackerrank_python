@@ -187,5 +187,27 @@ def weightedUniformStrings(s, queries):
     return ["Yes" if item in arr else "No" for item in queries]
 
 
+def separateNumbers(s):
+    # Write your code here
+    if len(s) == 1 or (len(s) == 2 and int(s[0]) != int(s[1]) + 1) and s[0] == '0':
+        return print("NO")
+    test_number = int(s[0])
+    for i in range(1, (len(s) // 2) + 1):
+        test_string = str(test_number)
+        j = 1
+        while len(s) > len(test_string):
+            test_string += str(test_number + j)
+            j += 1
+            # print(test_string)
+        if test_string == s:
+            return print(f"YES {test_number}")
+        if len(str(test_number)) < len(s):
+            test_number = int(s[:i+1])
+    return print("NO")
+
+
+    return print("NO")
+
+
 if __name__ == '__main__':
-    print(weightedUniformStrings("zabccddde", [5, 9, 7, 8, 12, 5]))
+    print(separateNumbers('99910001001'))
