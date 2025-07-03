@@ -52,6 +52,16 @@ def insertionSort2(n, arr):
         print(' '.join(map(str, arr)))
 
 
+def insertion_sort(l):
+    for i in range(1, len(l)):
+        j = i-1
+        key = l[i]
+        while (j >= 0) and (l[j] > key):
+           l[j+1] = l[j]
+           j -= 1
+        l[j+1] = key
+
+
 
 if __name__ == '__main__':
-    insertionSort2(5, str_to_list_of_int('2 4 6 8 3'))
+    insertion_sort(str_to_list_of_int('2 4 6 8 3'))
