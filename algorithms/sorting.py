@@ -61,6 +61,18 @@ def insertion_sort(l):
            j -= 1
         l[j+1] = key
 
+def runningTime(l):
+    total = 0
+    for i in range(1, len(l)):
+        j = i-1
+        key = l[i]
+        while (j >= 0) and (l[j] > key):
+           l[j+1] = l[j]
+           j -= 1
+           total += 1
+        l[j+1] = key
+    return total
+
 
 
 if __name__ == '__main__':
