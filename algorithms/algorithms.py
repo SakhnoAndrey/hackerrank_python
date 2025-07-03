@@ -112,9 +112,25 @@ def minimumNumber(n, password):
         is_special |= letter in special_characters
         is_numbers |= letter in numbers
     add_char = sum(map(lambda x: not x, [is_upper, is_lower, is_special, is_numbers]))
-    print(add_char)
     return min_len - n if n + add_char < min_len else add_char
 
 
+def caesarCipher(s, k):
+    # Write your code here
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    result = ""
+    for c in s:
+        is_upper = c.isupper()
+        c = c.lower()
+        pos = alphabet.find(c)
+        if pos >= 0:
+            pos += k % len(alphabet)
+            pos = pos - len(alphabet) if pos >= len(alphabet) - 1 else pos
+            c = alphabet[pos].upper() if is_upper else alphabet[pos]
+        result += c
+    return result
+
+
+
 if __name__ == '__main__':
-    print(minimumNumber(5, '#HackerRank'))
+    print(caesarCipher("www.abc.xy", 87))
