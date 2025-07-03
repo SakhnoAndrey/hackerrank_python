@@ -137,6 +137,20 @@ def marsExploration(s):
     return sum([1 for i, j in zip(s, right_signal) if i != j])
 
 
+def hackerrankInString(s):
+    # Write your code here
+    word = "hackerrank"
+    pos = 0
+    for letter in s:
+        if letter == word[pos]:
+            pos += 1
+        if pos == len(word):
+            return "YES"
+    return "NO"
+
+
+
+
 
 if __name__ == '__main__':
-    print(marsExploration("SOSSOSSOS"))
+    print(hackerrankInString("hhaacckkekraraannk"))
