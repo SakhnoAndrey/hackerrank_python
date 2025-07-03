@@ -131,6 +131,12 @@ def caesarCipher(s, k):
     return result
 
 
+def marsExploration(s):
+    # Write your code here
+    right_signal = "SOS" * 33
+    return sum([1 for i, j in zip(s, right_signal) if i != j])
+
+
 
 if __name__ == '__main__':
-    print(caesarCipher("www.abc.xy", 87))
+    print(marsExploration("SOSSOSSOS"))
