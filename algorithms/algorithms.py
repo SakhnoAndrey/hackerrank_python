@@ -163,5 +163,12 @@ def quickSort(arr):
     return left + equal + right
 
 
+def pangrams(s):
+    # Write your code here
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    s = s.replace(" ", "").lower()
+    return "pangram" if len(set(s)) == len(alphabet) else "not pangram"
+
+
 if __name__ == '__main__':
-    print(quickSort(str_to_list_of_int("4 5 3 7 2")))
+    print(pangrams("We promptly judged antique ivory buckles for the next prize"))
