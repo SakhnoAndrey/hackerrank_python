@@ -170,5 +170,22 @@ def pangrams(s):
     return "pangram" if len(set(s)) == len(alphabet) else "not pangram"
 
 
+def weightedUniformStrings(s, queries):
+    # Write your code here
+    arr = dict()
+    mult = 1
+    char_prev = ''
+    for i, char in enumerate(s):
+        if i != 0 and char == char_prev:
+            mult += 1
+            print(mult)
+            arr[(ord(char) - 96) * mult] = True
+        else:
+            arr[(ord(char) - 96)] = True
+            mult = 1
+            char_prev = char
+    return ["Yes" if item in arr else "No" for item in queries]
+
+
 if __name__ == '__main__':
-    print(pangrams("We promptly judged antique ivory buckles for the next prize"))
+    print(weightedUniformStrings("zabccddde", [5, 9, 7, 8, 12, 5]))
