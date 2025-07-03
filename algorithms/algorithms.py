@@ -90,5 +90,8 @@ def superReducedString(s):
         result = 'Empty String'
     return result
 
+def camelcase(s):
+    return 1 + sum([1 for letter in s if str(letter).isupper()])
+
 if __name__ == '__main__':
-    print(superReducedString('aaabccddd'))
+    print(camelcase('saveChangesInTheEditor'))
