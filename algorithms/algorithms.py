@@ -2,6 +2,8 @@ import math
 from email.charset import add_charset
 from itertools import combinations
 
+from helpers import str_to_list_of_int
+
 
 def twoPluses():
     # Write your code here
@@ -148,9 +150,18 @@ def hackerrankInString(s):
             return "YES"
     return "NO"
 
-
-
+def quickSort(arr):
+    # Write your code here
+    left, equal, right = [], [arr[0]], []
+    for item in arr[1:]:
+        if item < arr[0]:
+            left.append(item)
+        elif item == arr[0]:
+            equal.append(item)
+        else:
+            right.append(item)
+    return left + equal + right
 
 
 if __name__ == '__main__':
-    print(hackerrankInString("hhaacckkekraraannk"))
+    print(quickSort(str_to_list_of_int("4 5 3 7 2")))
