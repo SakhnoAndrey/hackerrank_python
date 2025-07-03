@@ -1,4 +1,5 @@
 import math
+from email.charset import add_charset
 from itertools import combinations
 
 
@@ -93,5 +94,27 @@ def superReducedString(s):
 def camelcase(s):
     return 1 + sum([1 for letter in s if str(letter).isupper()])
 
+
+def minimumNumber(n, password):
+    # Return the minimum number of characters to make the password strong
+    numbers = "0123456789"
+    lower_case = "abcdefghijklmnopqrstuvwxyz"
+    upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    special_characters = "!@#$%^&*()-+"
+    min_len = 6
+    is_lower = False
+    is_numbers = False
+    is_upper = False
+    is_special = False
+    for letter in password:
+        is_lower |= letter in lower_case
+        is_upper |= letter in upper_case
+        is_special |= letter in special_characters
+        is_numbers |= letter in numbers
+    add_char = sum(map(lambda x: not x, [is_upper, is_lower, is_special, is_numbers]))
+    print(add_char)
+    return min_len - n if n + add_char < min_len else add_char
+
+
 if __name__ == '__main__':
-    print(camelcase('saveChangesInTheEditor'))
+    print(minimumNumber(5, '#HackerRank'))
