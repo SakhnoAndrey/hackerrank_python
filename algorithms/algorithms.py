@@ -2,6 +2,8 @@ import math
 from email.charset import add_charset
 from itertools import combinations
 
+from typing import List
+
 from helpers import str_to_list_of_int
 
 
@@ -206,8 +208,12 @@ def separateNumbers(s):
     return print("NO")
 
 
-    return print("NO")
+def funnyString(s):
+    # Write your code here
+    arr = [ord(letter) for letter in s]
+    diff_arr = [abs(item - arr[i+1]) for i, item in enumerate(arr[:-1])]
+    return "Funny" if all([i == j for i, j in zip(diff_arr, diff_arr[::-1])]) else "Not Funny"
 
 
 if __name__ == '__main__':
-    print(separateNumbers('99910001001'))
+    print(funnyString('bcxz'))
