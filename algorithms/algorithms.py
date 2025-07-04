@@ -247,5 +247,17 @@ def gemstones(arr: list):
     return sum([all(elem) for elem in zip(*[list(item.values()) for item in data])])
 
 
+def alternatingCharacters(s):
+    # Write your code here
+    switch = 0
+    prev_letter = s[0]
+    for ch in s[1:]:
+        if ch != prev_letter:
+            switch += 1
+            prev_letter = ch
+    return len(s) - 1 - switch
+
+
 if __name__ == '__main__':
-    result = gemstones(['abcdde', 'baccd', 'eeabg'])
+    result = alternatingCharacters('AAABBB')
+    print(result)
