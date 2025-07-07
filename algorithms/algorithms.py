@@ -284,6 +284,30 @@ def beautifulBinaryString(b: str):
     return count
 
 
+def closestNumbers(arr):
+    if not isinstance(arr, list):
+        arr = str_to_list_of_int(arr)
+    arr = sorted(arr)
+    output = []
+    it = iter(arr)
+    item = next(it)
+    next_item = next(it)
+    diff_min = 10 ** 7
+    while next_item:
+        if diff_min > abs(next_item - item):
+            diff_min = abs(next_item - item)
+            output = [item, next_item]
+        elif diff_min == abs(next_item - item):
+            output += [item, next_item]
+        item = next_item
+        try:
+            next_item = next(it)
+        except StopIteration:
+            break
+    return output
+
+
+
 if __name__ == '__main__':
-    result = beautifulBinaryString('0100101010')
+    result = closestNumbers('5 4 3 2')
     print(result)
