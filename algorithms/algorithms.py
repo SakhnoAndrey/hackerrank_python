@@ -319,7 +319,137 @@ def findMedian(arr):
     return sorted(arr)[len(arr) // 2]
 
 
+def dna_input():
+    s = """
+    a b c aa d b
+    1 2 3 4 5 6
+    3
+    1 5 caaab
+    0 4 xyz
+    2 4 bcdybc
+    """
+    res = []
+    s = s.strip('\n').split('\n')
+    res.append(s[0].strip().split(' '))
+    res.append(list(map(int, s[1].strip().split(' '))))
+    for i in range(int(s[2].strip())):
+        res.append(list(map(lambda x: int(x) if str(x).isnumeric() else x, s[i+3].strip().split(' '))))
+    return res
+
+
+def determiningDNAhealthV1(genes: list = None, health: list = None, s: int = 0,
+                         first: int = 0, last: int = 0, d: str = None):
+
+    strands = []
+    if d is not None:
+        strands = [[first, last, d]]
+
+    if any(x is None for x in [genes, health]):
+        arr = dna_input()
+        genes = arr[0]
+        health = arr[1]
+        strands = arr[2:]
+
+    import re
+
+    min_res, max_res = 10**7, 0
+
+    for first, last, d in strands:
+        res_iter = 0
+        for g, h in zip(genes[first:last+1], health[first:last+1]):
+            matches = [m.group(1) for m in re.finditer(f'(?=({g}))', d)]
+            res_iter += len(matches) * h
+        min_res = min(res_iter, min_res)
+        max_res = max(res_iter, max_res)
+    print(f'{min_res} {max_res}')
+
+
+from collections import deque, defaultdict
+
+class Node:
+    def __init__(self):
+        self.children = {}
+        self.fail = None
+        self.output = []
+
+def build_automaton(genes, health, first, last):
+    root = Node()
+
+    # Построение Trie
+    for i in range(first, last + 1):
+        word = genes[i]
+        score = health[i]
+        node = root
+        for ch in word:
+            if ch not in node.children:
+                node.children[ch] = Node()
+            node = node.children[ch]
+        node.output.append(score)
+
+    # Построение ссылок "fail"
+    queue = deque()
+    for child in root.children.values():
+        child.fail = root
+        queue.append(child)
+
+    while queue:
+        current = queue.popleft()
+        for ch, child in current.children.items():
+            queue.append(child)
+            f = current.fail
+            while f and ch not in f.children:
+                f = f.fail
+            child.fail = f.children[ch] if f and ch in f.children else root
+            child.output += child.fail.output
+
+    return root
+
+def evaluate_dna(dna, automaton_root):
+    node = automaton_root
+    total = 0
+    for ch in dna:
+        while node and ch not in node.children:
+            node = node.fail
+        node = node.children[ch] if node and ch in node.children else automaton_root
+        total += sum(node.output)
+    return total
+
+def determiningDNAhealth(genes, health, strands):
+    min_score = float('inf')
+    max_score = float('-inf')
+
+    for first, last, dna in strands:
+        automaton = build_automaton(genes, health, first, last)
+        score = evaluate_dna(dna, automaton)
+        min_score = min(min_score, score)
+        max_score = max(max_score, score)
+
+    print(f"{min_score} {max_score}")
+
+
+def determiningDNAhealthV2(genes: list = None, health: list = None, s: int = 0, first: int = 0, last: int = 0, d: str = None):
+    strands = []
+    if d is not None:
+        strands = [[first, last, d]]
+
+    if any(x is None for x in [genes, health]):
+        arr = dna_input()
+        genes = arr[0]
+        health = arr[1]
+        strands = arr[2:]
+
+    min_score, max_score = 10**18, -10**18
+
+    for first, last, d in strands:
+        automaton = build_automaton(genes, health, first, last)
+        score = evaluate_dna(d, automaton)
+        min_score = min(min_score, score)
+        max_score = max(max_score, score)
+    print(f'{min_score} {max_score}')
+
+
+
 
 if __name__ == '__main__':
-    result = theLoveLetterMystery('abcba')
+    result = determiningDNAhealthV2()
     print(result)
