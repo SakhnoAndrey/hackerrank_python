@@ -364,7 +364,8 @@ def determiningDNAhealthV1(genes: list = None, health: list = None, s: int = 0,
     print(f'{min_res} {max_res}')
 
 
-from collections import deque
+from collections import deque, defaultdict
+import bisect
 
 class Node:
     def __init__(self):
@@ -372,15 +373,15 @@ class Node:
         self.fail = None
         self.outputs = []
 
-def build_aho_corasick(genes, health):
+def build_aho_corasick(unique_genes):
     root = Node()
-    for idx, (gene, h) in enumerate(zip(genes, health)):
+    for gene in unique_genes:
         node = root
         for ch in gene:
             if ch not in node.children:
                 node.children[ch] = Node()
             node = node.children[ch]
-        node.outputs.append((idx, h))
+        node.outputs.append(gene)
 
     # построение ссылок "fail"
     queue = deque()
@@ -400,17 +401,21 @@ def build_aho_corasick(genes, health):
 
     return root
 
-def search_dna(dna, root, first, last):
+def search_dna(dna, root, first, last, gene_map):
     node = root
     total = 0
     for ch in dna:
         while node and ch not in node.children:
             node = node.fail
         node = node.children[ch] if node and ch in node.children else root
-        for idx, h in node.outputs:
-            if first <= idx <= last:
-                total += h
+
+        for gene in node.outputs:  # теперь output — gene name
+            indices = gene_map[gene]
+            left = bisect.bisect_left(indices, (first, -float('inf')))
+            right = bisect.bisect_right(indices, (last, float('inf')))
+            total += sum(h for i, h in indices[left:right])
     return total
+
 
 
 
@@ -425,12 +430,17 @@ def determiningDNAhealthV2(genes: list = None, health: list = None, s: int = 0, 
         health = arr[1]
         strands = arr[2:]
 
-    root = build_aho_corasick(genes, health)
-    min_score = -10**18
-    max_score = 10**18
+    gene_map = defaultdict(list)  # gene -> list of (index, health)
+
+    for i, g in enumerate(genes):
+        gene_map[g].append((i, health[i]))
+
+    root = build_aho_corasick(list(gene_map.keys()))
+    min_score = 10**18
+    max_score = -10**18
 
     for first, last, d in strands:
-        score = search_dna(d, root, first, last)
+        score = search_dna(d, root, first, last, gene_map)
         min_score = min(min_score, score)
         max_score = max(max_score, score)
 
