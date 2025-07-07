@@ -307,7 +307,14 @@ def closestNumbers(arr):
     return output
 
 
+def theLoveLetterMystery(s):
+    # Write your code here
+    arr = [ord(ch) for ch in s]
+    len_arr = len(arr) // 2
+    return sum([abs(x - y) for x, y in zip(arr[:len_arr], arr[-len_arr:][::-1])])
+
+
 
 if __name__ == '__main__':
-    result = closestNumbers('5 4 3 2')
+    result = theLoveLetterMystery('abcba')
     print(result)
