@@ -314,6 +314,11 @@ def theLoveLetterMystery(s):
     return sum([abs(x - y) for x, y in zip(arr[:len_arr], arr[-len_arr:][::-1])])
 
 
+def findMedian(arr):
+    # Write your code here
+    return sorted(arr)[len(arr) // 2]
+
+
 
 if __name__ == '__main__':
     result = theLoveLetterMystery('abcba')
