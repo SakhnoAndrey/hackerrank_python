@@ -364,67 +364,54 @@ def determiningDNAhealthV1(genes: list = None, health: list = None, s: int = 0,
     print(f'{min_res} {max_res}')
 
 
-from collections import deque, defaultdict
+from collections import deque
 
 class Node:
     def __init__(self):
         self.children = {}
         self.fail = None
-        self.output = []
+        self.outputs = []
 
-def build_automaton(genes, health, first, last):
+def build_aho_corasick(genes, health):
     root = Node()
-
-    # Построение Trie
-    for i in range(first, last + 1):
-        word = genes[i]
-        score = health[i]
+    for idx, (gene, h) in enumerate(zip(genes, health)):
         node = root
-        for ch in word:
+        for ch in gene:
             if ch not in node.children:
                 node.children[ch] = Node()
             node = node.children[ch]
-        node.output.append(score)
+        node.outputs.append((idx, h))
 
-    # Построение ссылок "fail"
+    # построение ссылок "fail"
     queue = deque()
-    for child in root.children.values():
-        child.fail = root
-        queue.append(child)
+    for node in root.children.values():
+        node.fail = root
+        queue.append(node)
 
     while queue:
         current = queue.popleft()
         for ch, child in current.children.items():
             queue.append(child)
-            f = current.fail
-            while f and ch not in f.children:
-                f = f.fail
-            child.fail = f.children[ch] if f and ch in f.children else root
-            child.output += child.fail.output
+            fail_node = current.fail
+            while fail_node and ch not in fail_node.children:
+                fail_node = fail_node.fail
+            child.fail = fail_node.children[ch] if fail_node and ch in fail_node.children else root
+            child.outputs += child.fail.outputs
 
     return root
 
-def evaluate_dna(dna, automaton_root):
-    node = automaton_root
+def search_dna(dna, root, first, last):
+    node = root
     total = 0
     for ch in dna:
         while node and ch not in node.children:
             node = node.fail
-        node = node.children[ch] if node and ch in node.children else automaton_root
-        total += sum(node.output)
+        node = node.children[ch] if node and ch in node.children else root
+        for idx, h in node.outputs:
+            if first <= idx <= last:
+                total += h
     return total
 
-def determiningDNAhealth(genes, health, strands):
-    min_score = float('inf')
-    max_score = float('-inf')
-
-    for first, last, dna in strands:
-        automaton = build_automaton(genes, health, first, last)
-        score = evaluate_dna(dna, automaton)
-        min_score = min(min_score, score)
-        max_score = max(max_score, score)
-
-    print(f"{min_score} {max_score}")
 
 
 def determiningDNAhealthV2(genes: list = None, health: list = None, s: int = 0, first: int = 0, last: int = 0, d: str = None):
@@ -438,14 +425,16 @@ def determiningDNAhealthV2(genes: list = None, health: list = None, s: int = 0, 
         health = arr[1]
         strands = arr[2:]
 
-    min_score, max_score = 10**18, -10**18
+    root = build_aho_corasick(genes, health)
+    min_score = -10**18
+    max_score = 10**18
 
     for first, last, d in strands:
-        automaton = build_automaton(genes, health, first, last)
-        score = evaluate_dna(d, automaton)
+        score = search_dna(d, root, first, last)
         min_score = min(min_score, score)
         max_score = max(max_score, score)
-    print(f'{min_score} {max_score}')
+
+    print(f"{min_score} {max_score}")
 
 
 
